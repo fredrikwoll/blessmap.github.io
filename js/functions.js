@@ -31,7 +31,6 @@ var map = L.map('map', {
     position: 'topright'
   },
   crs: L.CRS.MySimple,
-  layers: [blessMap, blessOverlayMap, overlayMap]
 
 }).setView([2560,2560], 2);
 
@@ -73,7 +72,8 @@ var baseMaps = {
     "Bless + Overlay": blessOverlayMap,
 	"Overlay": overlayMap
 };
-new L.control.layers(baseMaps).addTo(map);
+
+new L.control.layers(baseMaps,null,{collapsed:false}).addTo(map);
 
 map.setMaxBounds([[-4000, -4000], [15000, 15000]]);
 
