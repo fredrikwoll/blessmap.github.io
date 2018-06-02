@@ -519,7 +519,70 @@ var mapMarkers =
 	icon:"meteorite",
 	width: "36",
 	height: "36"},
-
+  {
+	icon:"stone",
+	width: "36",
+	height: "36"},
+  {
+	icon:"cotton",
+	width: "36",
+	height: "36"},	
+  {
+	icon:"rice",
+	width: "36",
+	height: "36"},
+  {
+	icon:"wheat",
+	width: "36",
+	height: "36"},
+  {
+	icon:"barley",
+	width: "36",
+	height: "36"},
+  {
+	icon:"corn",
+	width: "36",
+	height: "36"},	
+  {
+	icon:"mint",
+	width: "36",
+	height: "36"},
+  {
+	icon:"chili",
+	width: "36",
+	height: "36"},
+  {
+	icon:"saffron",
+	width: "36",
+	height: "36"},	
+  {
+	icon:"coconut",
+	width: "36",
+	height: "36"},
+  {
+	icon:"banana",
+	width: "36",
+	height: "36"},
+  {
+	icon:"apple",
+	width: "36",
+	height: "36"},
+  {
+	icon:"peach",
+	width: "36",
+	height: "36"},
+  {
+	icon:"cranberry",
+	width: "36",
+	height: "36"},
+  {
+	icon:"blueberry",
+	width: "36",
+	height: "36"},
+  {
+	icon:"tomato",
+	width: "36",
+	height: "36"},
 ]
 
 var markerIconTypes = [];

@@ -249,12 +249,31 @@ a.btn:hover .btn-text {
 .allmarkers {background-image: url(../assets/images/allmarkers.png);}
 .cities {background-image: url(../assets/images/cities.png);}
 
-.cities {background-image: url(../assets/images/cities.png);}
 .iron {background-image: url(../assets/images/iron.png);}
 .copper {background-image: url(../assets/images/copper.png);}
 .silver {background-image: url(../assets/images/silver.png);}
 .gold {background-image: url(../assets/images/gold.png);}
 .meteorite {background-image: url(../assets/images/meteorite.png);}
+.stone {background-image: url(../assets/images/stone.png);}
+
+.cotton {background-image: url(../assets/images/cotton.png);}
+
+.rice {background-image: url(../assets/images/rice.png);}
+.wheat {background-image: url(../assets/images/wheat.png);}
+.barley {background-image: url(../assets/images/barley.png);}
+.corn {background-image: url(../assets/images/corn.png);}
+.tomato {background-image: url(../assets/images/tomato.png);}
+
+.mint {background-image: url(../assets/images/mint.png);}
+.chili {background-image: url(../assets/images/chili.png);}
+.saffron {background-image: url(../assets/images/saffron.png);}
+
+.coconut {background-image: url(../assets/images/coconut.png);}
+.banana {background-image: url(../assets/images/banana.png);}
+.apple {background-image: url(../assets/images/apple.png);}
+.peach {background-image: url(../assets/images/peach.png);}
+.cranberry {background-image: url(../assets/images/cranberry.png);}
+.blueberry {background-image: url(../assets/images/blueberry.png);}
 
 .cc {
   opacity: 0;
