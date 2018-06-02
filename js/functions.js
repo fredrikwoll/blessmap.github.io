@@ -1,7 +1,9 @@
 var version = 0.0;
 var url = ('http://' + window.location.hostname + '/');
 var iconsUrl = './assets/images/';
-var tilesUrl = "./map/{z}_{x}_{y}.png";
+var tilesUrl = "./map/bless/{z}_{x}_{y}.png";
+var blessOverlayUrl = "./map/blessoverlay/{z}_{x}_{y}.png";
+var overlayUrl = "./map/overlay/{z}_{x}_{y}.png";
 var maxNativeZoom = 6;
 var mapMinZoom = 1;
 var mapMaxZoom = 8;
@@ -29,10 +31,11 @@ var map = L.map('map', {
     position: 'topright'
   },
   crs: L.CRS.MySimple,
+  layers: [blessMap, blessOverlayMap, overlayMap]
 
 }).setView([2560,2560], 2);
 
-L.tileLayer(tilesUrl, {
+var blessMap = L.tileLayer(tilesUrl, {
   maxNativeZoom: maxNativeZoom,
   minZoom: mapMinZoom,
   maxZoom: mapMaxZoom,
@@ -42,6 +45,35 @@ L.tileLayer(tilesUrl, {
   bounds: myBounds,
   continuousWorld: true
 }).addTo(map);
+
+var blessOverlayMap = L.tileLayer(blessOverlayUrl, {
+  maxNativeZoom: maxNativeZoom,
+  minZoom: mapMinZoom,
+  maxZoom: mapMaxZoom,
+  tileSize: tileSize,
+  noWrap: true,
+  tms: false,
+  bounds: myBounds,
+  continuousWorld: true
+});
+
+var overlayMap = L.tileLayer(overlayUrl, {
+  maxNativeZoom: maxNativeZoom,
+  minZoom: mapMinZoom,
+  maxZoom: mapMaxZoom,
+  tileSize: tileSize,
+  noWrap: true,
+  tms: false,
+  bounds: myBounds,
+  continuousWorld: true
+});
+
+var baseMaps = {
+    "Bless": blessMap,
+    "Bless + Overlay": blessOverlayMap,
+	"Overlay": overlayMap
+};
+new L.control.layers(baseMaps).addTo(map);
 
 map.setMaxBounds([[-4000, -4000], [15000, 15000]]);
 
