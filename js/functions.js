@@ -32,7 +32,7 @@ var map = L.map('map', {
   },
   crs: L.CRS.MySimple,
 
-}).setView([2560,2560], 2);
+}).setView([5120,5120], 2);
 
 var blessMap = L.tileLayer(tilesUrl, {
   maxNativeZoom: maxNativeZoom,
