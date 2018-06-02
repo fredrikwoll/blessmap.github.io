@@ -583,6 +583,18 @@ var mapMarkers =
 	icon:"tomato",
 	width: "36",
 	height: "36"},
+  {
+	icon:"cabbage",
+	width: "36",
+	height: "36"},
+  {
+	icon:"parsley",
+	width: "36",
+	height: "36"},
+  {
+	icon:"moonweed",
+	width: "36",
+	height: "36"},
 ]
 
 var markerIconTypes = [];
