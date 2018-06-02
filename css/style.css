@@ -249,6 +249,13 @@ a.btn:hover .btn-text {
 .allmarkers {background-image: url(../assets/images/allmarkers.png);}
 .cities {background-image: url(../assets/images/cities.png);}
 
+.cities {background-image: url(../assets/images/cities.png);}
+.iron {background-image: url(../assets/images/iron.png);}
+.copper {background-image: url(../assets/images/copper.png);}
+.silver {background-image: url(../assets/images/silver.png);}
+.gold {background-image: url(../assets/images/gold.png);}
+.meteorite {background-image: url(../assets/images/meteorite.png);}
+
 .cc {
   opacity: 0;
   position: absolute;

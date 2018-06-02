@@ -14,7 +14,7 @@ var halfTile = tileSize / 2;
 var mapBounds = 10240;
 
 L.CRS.MySimple = L.extend({}, L.CRS.Simple, {
-	transformation: new L.Transformation(1 / 16, 0, -1 / 16, 320)
+	transformation: new L.Transformation(1 / 32, 0, -1 / 32, 320)
 });
 
 var myBounds = [[0,0],[mapBounds, mapBounds]];
@@ -467,7 +467,27 @@ var mapMarkers =
 	icon:"arrow",
 	width: "36",
 	height: "36"},
-	
+  {
+	icon:"iron",
+	width: "36",
+	height: "36"},
+  {
+	icon:"copper",
+	width: "36",
+	height: "36"},
+  {
+	icon:"silver",
+	width: "36",
+	height: "36"},
+  {
+	icon:"gold",
+	width: "36",
+	height: "36"},
+  {
+	icon:"meteorite",
+	width: "36",
+	height: "36"},
+
 ]
 
 var markerIconTypes = [];
@@ -837,7 +857,7 @@ $('#usermarkers').click(function(){
 map.on('click', function (e) {
   var lat = Math.round(e.latlng.lat);
   var long = Math.round(e.latlng.lng);
-  if (long < 0 || long > 5120 || lat < 0 || lat > 5120) {
+  if (long < 0 || long > 10240 || lat < 0 || lat > 10240) {
    console.log("lat: "+lat+ "long: "+long);
   } else {
     message = '<span class="coordsinfo">X: ' +long+ ' ' + 'Y: ' +lat+ '</span><br><button class="add-marker" data-i18n="add_marker" onclick="addMarkerText('+lat+','+long+')">Add marker</button>';
@@ -976,8 +996,8 @@ function onPopupOpenShared() {
     
         storageMarkers.push({
           "coords": {
-            "x": smY,
-            "y": smX
+            "x": smX,
+            "y": smY
           },
           "name": editedtitle,
           "icon": (markerIconTypes[editedicon]),
