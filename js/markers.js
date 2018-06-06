@@ -7,6 +7,9 @@ var textMarkers =
     "name": "<span data-i18n='SPEZIA'>SPEZIA</span>",
     "coords": [4090,4283]
 }]
+// Multimarker
+var multiMarkers = 
+[]
 //Game Markers
 var markers = 
 [

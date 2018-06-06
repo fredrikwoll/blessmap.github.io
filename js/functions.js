@@ -208,6 +208,20 @@ function getIcon(index) {
   return markerIcon;
 }
 
+function getMultiIcon(index) {
+  var icon = multiMarkers[index].icon;
+	
+  var markerIcon = L.icon({
+    iconUrl: iconsUrl+icon+'.png',
+    iconSize: [36,36], // size of the icon
+    iconAnchor:   [18, 18], // point of the icon which will correspond to marker's location
+    popupAnchor:  [0, -18],
+    // point from which the popup should open relative to the iconAnchor
+  });
+
+  return markerIcon;
+}
+
 // GAME MARKERS
 
 for (var i = 0; i < markers.length; i++) {
@@ -242,6 +256,42 @@ for (var i = 0; i < markers.length; i++) {
   // Add the marker
   var marker = L.marker([x, y], {icon: getIcon(i),title: markers[i].group}).bindPopup("<p class='mtitle'>"+markers[i].name + "</p><span class='mdesc'>"+ markers[i].desc +"</span><ul class='ilist'>"+ilist+"</ul><p class='original_coords'>"+origin_y+","+origin_x+"</p><p class='markerlink hide'>"+markerUrl+"</p><button class='copymarkerurl'><span class='sharetext'  data-i18n='copylink'>Copy link</span><span class='copiedmsg hide'>Copied</span></button>").addTo(layerGroups[markers[i].group]);
 	globalMarkers.push(marker);
+}
+
+for (var i = 0; i < multiMarkers.length; i++) {
+	for (var j = 0; j < multiMarkers[i].groups.length; j++) {
+		// if the group doesn't exists in layergroups
+		if (layerGroups[multiMarkers[i].groups[j]] == undefined) {
+			// Create the group
+			layerGroups[multiMarkers[i].groups[j]] = new L.LayerGroup();
+			}
+			if (multiMarkers[i].desc == undefined) {
+				multiMarkers[i].desc = "";
+				}
+				if (multiMarkers[i].items == undefined) {
+					multiMarkers[i].items = "";
+					}
+					if (multiMarkers[i].kcditems == undefined) {
+						multiMarkers[i].kcditems = "";
+						}
+						var ilist = "";
+						for (var h in multiMarkers[i].kcditems) {
+							var kcditems =  multiMarkers[i].kcditems[h];
+							ilist += '<li><i class="'+ multiMarkers[i].kcditems[h].item+'"></i><span class="iname" data-i18n="'+ multiMarkers[i].kcditems[h].item+'">'+ multiMarkers[i].kcditems[h].item.replace(/_/gi, " ")+'</span><span class="qnt">'+multiMarkers[i].kcditems[h].qnt+'</span></li>';
+							}
+							var x = (multiMarkers[i].coords[1]).toFixed(0);
+							var y = (multiMarkers[i].coords[0]).toFixed(0);
+							
+							var origin_x = (multiMarkers[i].coords[1]);
+							var origin_y = (multiMarkers[i].coords[0]);
+							
+							var markerUrl = (url+"?marker="+y+","+x);
+							markerUrl = encodeURI(markerUrl);
+							
+							// Add the marker
+							var marker = L.marker([x, y], {icon: getMultiIcon(i),title: multiMarkers[i].name}).bindPopup("<p class='mtitle'>"+multiMarkers[i].name + "</p><span class='mdesc'>"+ multiMarkers[i].desc +"</span><ul class='ilist'>"+ilist+"</ul><p class='original_coords'>"+origin_y+","+origin_x+"</p><p class='markerlink hide'>"+markerUrl+"</p><button class='copymarkerurl'><span class='sharetext'  data-i18n='copylink'>Copy link</span><span class='copiedmsg hide'>Copied</span></button>").addTo(layerGroups[multiMarkers[i].groups[j]]);
+							globalMarkers.push(marker);
+	}
 }
 
 function getIconUsr(index) {
@@ -310,11 +360,13 @@ var allmarkers = document.getElementById('allmarkers');
 function toggleAll(element) {
 		if (element.checked) {
 			$('.markers-list input').prop('checked', true);
+			$('.mining-list input').prop('checked', true);
 			for (var key in layerGroups) {
 				map.addLayer(layerGroups[key]);
 			}
 		} else {
 			$('.markers-list input').prop('checked', false);
+			$('.mining-list input').prop('checked', false);
 			for (var keys in layerGroups) {
 				map.removeLayer(layerGroups[keys]);
 			}
@@ -330,6 +382,10 @@ $(allmarkers).click(function(){
       toggled = {id: $(this).attr('id'), value: $(this).prop('checked')};
       activemarkers.push(toggled);
     });
+	$('.mining-list input').each(function() {
+      toggled = {id: $(this).attr('id'), value: $(this).prop('checked')};
+      activemarkers.push(toggled);
+    });
     localStorage.setItem("activemarkers", JSON.stringify(activemarkers));
 
   }
@@ -339,6 +395,22 @@ $(allmarkers).click(function(){
 });
 
 $('.markers-list input').each(function() {
+  this.onchange = function() {
+    toggle(this, this.id);
+    if (this.id == "textmarkers") {
+      if ($(this.id).is(':checked')) {
+        $('.text-label').css('visibility', 'hidden');
+        $('.text-label.secondary').css('visibility', 'hidden');
+      } else {
+        $('.text-label').css('visibility', 'visible');
+        $('.text-label').css('font-size', '24px');
+        $('.text-label.secondary').css('visibility', 'hidden');
+      }
+    }
+  };
+});
+
+$('.mining-list input').each(function() {
   this.onchange = function() {
     toggle(this, this.id);
     if (this.id == "textmarkers") {
@@ -497,6 +569,10 @@ var mapMarkers =
 [
   {
 	icon:"arrow",
+	width: "36",
+	height: "36"},
+  {
+	icon:"gathernode",
 	width: "36",
 	height: "36"},
   {
@@ -1247,6 +1323,15 @@ $('.toggle-title').click(function(){
 $('.markers-list input').on('change', function() {
   var toggled, activemarkers = [];
   $('.markers-list input').each(function() { // run through each of the checkboxes
+    toggled = {id: $(this).attr('id'), value: $(this).prop('checked')};
+    activemarkers.push(toggled);
+  });
+  localStorage.setItem("activemarkers", JSON.stringify(activemarkers));
+});
+
+$('.mining-list input').on('change', function() {
+  var toggled, activemarkers = [];
+  $('.mining-list input').each(function() { // run through each of the checkboxes
     toggled = {id: $(this).attr('id'), value: $(this).prop('checked')};
     activemarkers.push(toggled);
   });
